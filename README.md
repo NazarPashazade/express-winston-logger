@@ -1,3 +1,17 @@
+## Installation
+
+```bash
+npm i np-express-winston-logger
+```
+
+Or using yarn:
+
+```bash
+yarn add np-express-winston-logger
+```
+
+---
+
 ### What This Package Does
 
 - Provides a **centralized logger** for your Node.js services.
@@ -39,7 +53,7 @@ Quick Start Example
 
 ```ts
 import express from "express";
-import { createLogger, LogLevel } from "np-express-logger";
+import { createLogger, LogLevel } from "np-express-winston-logger";
 
 // Initialize logger
 const { logger, httpLogger } = createLogger({

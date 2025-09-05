@@ -21,4 +21,5 @@ yarn-error.log*
 Thumbs.db
 
 # TypeScript
+*.js.map
 *.tsbuildinfo

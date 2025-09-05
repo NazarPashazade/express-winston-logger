@@ -1,0 +1,39 @@
+{
+  "name": "np-express-logger",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "prepare": "npm run build"
+  },
+  "license": "ISC",
+  "description": "",
+  "author": "Nazar Pashazade <pashazade.nazar@gmail.com>",
+  "keywords": [
+    "express",
+    "logger",
+    "winston",
+    "elasticsearch",
+    "typescript"
+  ],
+  "files": [
+    "dist"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/np-express-logger.git"
+  },
+  "bugs": {
+    "url": "https://github.com/your-username/np-express-logger/issues"
+  },
+  "dependencies": {
+    "express-winston": "^4.2.0",
+    "winston": "^3.17.0",
+    "winston-elasticsearch": "^0.19.0"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.3",
+    "typescript": "^5.9.2"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "sourceMap": true,
+    "declaration": true,
+
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "exactOptionalPropertyTypes": true,
+    "skipLibCheck": true,
+
+    "module": "commonjs",
+    "target": "esnext",
+    "moduleDetection": "force",
+    "isolatedModules": true,
+
+    "rootDir": "./src",
+    "outDir": "./dist"
+  }
+}

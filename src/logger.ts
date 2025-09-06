@@ -9,10 +9,9 @@ import {
 
 export function createLogger({
   serviceName,
-  elasticsearchUrl,
+  elasticsearch,
   level = LogLevel.INFO,
   enableConsole = true,
-  enableElasticsearch = true,
 }: LoggerOptions) {
   const transportsList: any[] = [];
 
@@ -20,11 +19,11 @@ export function createLogger({
     transportsList.push(createConsoleTransport(level));
   }
 
-  if (enableElasticsearch) {
+  if (elasticsearch?.enable) {
     transportsList.push(
       createElasticsearchTransport({
         level,
-        url: elasticsearchUrl,
+        url: elasticsearch.url,
         serviceName,
       })
     );

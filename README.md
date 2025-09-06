@@ -58,10 +58,11 @@ import { createLogger, LogLevel } from "np-express-winston-logger";
 // Initialize logger
 const { logger, httpLogger } = createLogger({
   serviceName: "product-service",
-  elasticsearchUrl: "http://localhost:9200",
   level: LogLevel.INFO,
   enableConsole: true,
-  enableElasticsearch: true,
+  elasticsearch: {
+    url: "http://localhost:9200",
+  },
 });
 
 const app = express();

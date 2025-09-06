@@ -1,8 +1,6 @@
 import { LogLevel } from "./log-level";
 
-export type ElasticsearchOptions =
-  | { enable: false }
-  | { enable: true; url: string };
+export type ElasticsearchOptions = { url: string };
 
 export interface LoggerOptions {
   serviceName: string;

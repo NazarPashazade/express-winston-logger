@@ -19,7 +19,7 @@ export function createLogger({
     transportsList.push(createConsoleTransport(level));
   }
 
-  if (elasticsearch?.enable) {
+  if (elasticsearch) {
     transportsList.push(
       createElasticsearchTransport({
         level,

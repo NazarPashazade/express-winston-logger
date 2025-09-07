@@ -1,7 +1,7 @@
+import { format, transports } from "winston";
 import { ElasticsearchTransport, LogData } from "winston-elasticsearch";
 import { CustomLogData } from "./types/custom-log-data";
 import { LogLevel } from "./types/log-level";
-import { format, transports } from "winston";
 
 export const createConsoleTransport = (minLevel: LogLevel) => {
   const consoleFormat = format.combine(
@@ -16,9 +16,7 @@ export const createConsoleTransport = (minLevel: LogLevel) => {
         : "";
       const stackString = `${stack ? `\n${stack}` : ""} `;
 
-      let reqId = log.requestId || (log.meta as any)?.requestId;
-
-      reqId = reqId ? `[reqId=${reqId}]` : "";
+      const reqId = log.requestId ? `[reqId=${log.requestId}]` : "";
 
       return `${timestamp} [${level}] ${service}: ${reqId} ${message}: ${stackString} ${metaString}`;
     })

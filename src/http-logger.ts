@@ -24,7 +24,6 @@ export const createHttpLogger = (logger: Logger) => {
       query: req.query,
       body: req.body,
       statusCode: res.statusCode,
-      requestId: (req as any).requestId,
     }),
   });
 

@@ -1,4 +1,5 @@
 import { format, createLogger as winstonCreateLogger } from "winston";
+import { injectRequestId } from "./context";
 import { createHttpLogger } from "./http-logger";
 import { sanitizeData } from "./sanitizer";
 import {
@@ -56,6 +57,7 @@ export function createLogger({
       }
       return log;
     })(),
+    format((log) => (true ? injectRequestId(log) : log))(),
     format.timestamp({ format: () => new Date().toISOString() }),
     format.errors({ stack: true }),
     format.splat(),

@@ -47,20 +47,22 @@ yarn add np-express-winston-logger
 
 ## Usage
 
-### Minimal Setup
+### ✅ Minimal Setup
+
+How to quickly integrate the logger into an Express app.
 
 ```ts
 import express from "express";
 import { createLogger } from "np-express-winston-logger";
 
-// Initialize logger
+// 1. Initialize logger
 const { logger, httpLogger } = createLogger({
   serviceName: "product-service",
 });
 
 const app = express();
 
-// Attach HTTP logger middleware
+// 2. Attach HTTP logger middleware
 app.use(httpLogger);
 
 app.get("/", (_req, res) => {
@@ -93,9 +95,9 @@ Console Output:
 
 ---
 
-### Enable Sanitization
+### ✅ Enable Sanitization
 
-✅ Enable sanitization for custom sensitive fields.
+Enable sanitization for custom sensitive fields.
 
 Default sensitive fields (`password`, `token`, `accessToken`, `refreshToken`) are sanitized automatically, so you don’t need to pass them explicitly.
 
@@ -123,9 +125,9 @@ const { logger, httpLogger } = createLogger({
 
 ---
 
-### Enable Environment
+### ✅ Enable Environment
 
-✅ Supported environment values: "dev" | "prod" | "test" | "stage"
+Supported environment values: "dev" | "prod" | "test" | "stage"
 
 It allows you to adjust log behavior, for example:
 
@@ -148,12 +150,12 @@ const { logger, httpLogger } = createLogger({
 
 ---
 
-### Enable Elasticsearch
+### ✅ Enable Elasticsearch
 
 You can configure the logger to send logs to an Elasticsearch instance.
 This allows centralized storage, searching, and visualization of logs.
 
-✅ Notes:
+Notes:
 
 - If you don’t provide the elasticsearch field, logs will not be sent to Elasticsearch.
 
@@ -174,7 +176,7 @@ const { logger, httpLogger } = createLogger({
 
 ---
 
-### Enable minLevel
+### ✅ Enable minLevel
 
 minLevel defines the minimum log level that the logger will process and send to the configured transports (console, Elasticsearch, etc.).
 
@@ -207,7 +209,7 @@ const { logger, httpLogger } = createLogger({
 
 ---
 
-### Enable RequestId middleware
+### ✅ Enable RequestId middleware
 
 If you want all your logs (both HTTP request logs and manual logger.info, logger.error, etc.) to automatically include a unique requestId, you need to enable the requestIdMiddleware.
 
@@ -250,7 +252,7 @@ Console Output:
 
 ---
 
-### Example Log Levels
+### ✅ Example Log Levels
 
 Each log level is on its own line for readability.
 

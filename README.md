@@ -12,19 +12,21 @@ yarn add np-express-winston-logger
 
 ---
 
-### What This Package Does
+## What This Package Does
 
 - Provides a **centralized logger** for your Node.js services.
 
-- Supports **console logging** with colored output.
-
 - Integrates with **Elasticsearch** to store logs in a structured format.
 
-- Written in TypeScript for full type safety and better IDE support.
+- Allows **Sanitization** of sensitive fields (like password, token, email) in logs, with customizable fields.
 
 - Returns a ready-to-use `logger` instance for application logging.
 
-- Configurable log levels, service name, and Elasticsearch integration.
+- Supports automatic **RequestId injection** to correlate logs per request.
+
+- Written in **TypeScript** for full type safety and better IDE support.
+
+- Supports **console logging** with colored output.
 
 - Provides **Express middleware** (`httpLogger`) to log all HTTP requests with dynamic log levels:
 
@@ -42,6 +44,8 @@ yarn add np-express-winston-logger
         statusCode: res.statusCode
     }
   ```
+
+- Configurable log levels, service name, and **Elasticsearch integration**.
 
 ---
 

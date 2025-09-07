@@ -18,12 +18,13 @@ export const createHttpLogger = (logger: Logger) => {
       return LogLevel.INFO;
     },
     ignoreRoute: () => false,
-    meta: false,
+    meta: true,
     dynamicMeta: (req, res) => ({
       params: req.params,
       query: req.query,
       body: req.body,
       statusCode: res.statusCode,
+      requestId: (req as any).requestId,
     }),
   });
 

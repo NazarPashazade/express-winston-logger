@@ -13,5 +13,4 @@ export interface LoggerOptions {
   elasticsearch?: ElasticsearchOptions;
   sanitize?: SanitizeOptions;
   env?: Environments;
-  requestId?: string;
 }

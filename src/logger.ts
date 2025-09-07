@@ -44,15 +44,13 @@ export function createLogger({
       const splat = log[Symbol.for("splat")] as any[];
 
       if (sanitize) {
-        if (log.meta) {
-          log.meta = sanitizeData(log.meta, sanitize.sensitiveFields);
-        }
+        const extraFields = sanitize.sensitiveFields;
+
+        if (log.meta) log.meta = sanitizeData(log.meta, extraFields);
 
         if (splat?.length) {
           log[Symbol.for("splat")] = splat.map((item) =>
-            typeof item === "object"
-              ? sanitizeData(item, sanitize.sensitiveFields)
-              : item
+            typeof item === "object" ? sanitizeData(item, extraFields) : item
           );
         }
       }

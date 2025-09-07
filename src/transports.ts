@@ -8,14 +8,19 @@ export const createConsoleTransport = (minLevel: LogLevel) => {
     format.colorize(),
     format.timestamp({ format: () => new Date().toISOString() }),
     format.errors({ stack: true }),
-    format.printf((logData) => {
-      const { level, message, timestamp, service, stack } = logData;
-      const splat = (logData[Symbol.for("splat")] as any[]) || [];
+    format.printf((log) => {
+      const { level, message, timestamp, service, stack } = log;
+      const splat = (log[Symbol.for("splat")] as any[]) || [];
       const metaString = splat.length
         ? ` ${JSON.stringify(splat[0], null, 2)}`
         : "";
       const stackString = `${stack ? `\n${stack}` : ""} `;
-      return `${timestamp} [${level}] ${service}: ${message} ${stackString} ${metaString}`;
+
+      let reqId = log.requestId || (log.meta as any)?.requestId;
+
+      reqId = reqId ? `[reqId=${reqId}]` : "";
+
+      return `${timestamp} [${level}] ${service}: ${reqId} ${message}: ${stackString} ${metaString}`;
     })
   );
 

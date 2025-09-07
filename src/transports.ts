@@ -3,7 +3,7 @@ import { CustomLogData } from "./types/custom-log-data";
 import { LogLevel } from "./types/log-level";
 import { format, transports } from "winston";
 
-export const createConsoleTransport = (logLevel: LogLevel) => {
+export const createConsoleTransport = (minLevel: LogLevel) => {
   const consoleFormat = format.combine(
     format.colorize(),
     format.timestamp({ format: () => new Date().toISOString() }),
@@ -21,14 +21,14 @@ export const createConsoleTransport = (logLevel: LogLevel) => {
 
   return new transports.Console({
     handleExceptions: true,
-    level: logLevel,
+    level: minLevel,
     format: consoleFormat,
   });
 };
 
 export const createElasticsearchTransport = ({
   url,
-  logLevel,
+  minLevel,
   serviceName,
 }: any) => {
   const esTransfer = (logData: LogData) => {
@@ -48,7 +48,7 @@ export const createElasticsearchTransport = ({
   };
 
   return new ElasticsearchTransport({
-    level: logLevel,
+    level: minLevel,
     clientOpts: { node: url },
     indexPrefix: `${serviceName}-logs`,
     transformer: esTransfer,

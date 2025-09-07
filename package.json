@@ -1,6 +1,6 @@
 {
   "name": "np-express-winston-logger",
-  "version": "1.0.6",
+  "version": "1.0.17",
   "description": "A TypeScript logger for Express using Winston and Elasticsearch",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -17,11 +17,14 @@
     "prepare": "npm run build"
   },
   "keywords": [
-    "express",
     "logger",
+    "express",
     "winston",
     "elasticsearch",
-    "typescript"
+    "typescript",
+    "middleware",
+    "logging",
+    "http-logger"
   ],
   "author": "Nazar Pashazade <pashazade.nazar@gmail.com>",
   "license": "ISC",

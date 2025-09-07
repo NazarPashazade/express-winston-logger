@@ -74,7 +74,7 @@ app.listen(3000, () => {
 });
 ```
 
-Output
+Console Output:
 
 ```bash
   2025-09-07T08:41:01.431Z [info] product-service: Server started successfully
@@ -203,6 +203,49 @@ const { logger, httpLogger } = createLogger({
   logger.info(...)	  ✅ Logged
   logger.warn(...)	  ✅ Logged
   logger.error(...)	  ✅ Logged
+```
+
+---
+
+### Enable RequestId middleware
+
+If you want all your logs (both HTTP request logs and manual logger.info, logger.error, etc.) to automatically include a unique requestId, you need to enable the requestIdMiddleware.
+
+- Helps trace logs across services in distributed systems.
+
+- Every request gets a unique identifier.
+
+- You don’t need to manually pass requestId into every logger.info — it’s automatic.
+
+```ts
+import { createLogger, requestIdMiddleware } from "np-express-winston-logger";
+
+const { logger, httpLogger } = createLogger({
+  serviceName: "product-service",
+});
+
+// ✅ 1. Enable requestId per request
+app.use(requestIdMiddleware);
+
+// ✅ 2. Attach httpLogger to capture incoming requests
+app.use(httpLogger);
+```
+
+Console Output:
+
+```bash
+  2025-09-07T08:41:01.431Z [info] product-service: [reqId=77d4eb31-efa2-4f44-b4c6-fab8547aa0c9] Server started successfully
+
+  2025-09-07T08:20:18.456Z [info] product-service: [reqId=77d4eb31-efa2-4f44-b4c6-fab8547aa0c9] User fetched successfully
+  {
+    "user": {
+      "id": 1,
+      "email": "john@example.com",
+      "password": secret
+    }
+  }
+
+  2025-09-07T08:20:18.457Z [http] product-service: [reqId=77d4eb31-efa2-4f44-b4c6-fab8547aa0c9] GET / 200 5ms
 ```
 
 ---

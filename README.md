@@ -1,3 +1,7 @@
+### Stable Version
+
+The current stable version of this library is `1.0.44`.
+
 ## Installation
 
 ```bash

@@ -1,6 +1,6 @@
 {
   "name": "np-express-winston-logger",
-  "version": "1.0.43",
+  "version": "1.0.44",
   "description": "A TypeScript logger for Express using Winston and Elasticsearch",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

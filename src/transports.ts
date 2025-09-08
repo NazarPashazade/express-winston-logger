@@ -16,7 +16,7 @@ export const createConsoleTransport = (minLevel: LogLevel) => {
         : "";
       const stackString = `${stack ? `\n${stack}` : ""} `;
 
-      const reqId = log.requestId ? `[reqId=${log.requestId}]` : "";
+      const reqId = log?.requestId ? `[reqId=${log.requestId}]` : "";
 
       return `${timestamp} [${level}] ${service}: ${reqId} ${message}: ${stackString} ${metaString}`;
     })
@@ -34,11 +34,10 @@ export const createElasticsearchTransport = ({
   minLevel,
   serviceName,
 }: any) => {
-  const esTransfer = (logData: LogData) => {
-    const { level, message, timestamp, service, stack } =
-      logData as CustomLogData;
+  const esTransfer = (log: any) => {
+    const { level, message, timestamp, service, stack } = log as CustomLogData;
 
-    const meta = (logData as any)[Symbol.for("splat")]?.[0] || logData?.meta;
+    const meta = (log as any)[Symbol.for("splat")]?.[0] || log?.meta;
 
     return {
       timestamp,

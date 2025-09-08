@@ -12,19 +12,29 @@ yarn add np-express-winston-logger
 
 ---
 
-## What This Package Does
+## 🔹 Why Use This Library
+
+This library provides a **ready-to-use logging solution** for Express applications.
+
+So you don’t have to deal with configuring **Winston, Elasticsearch, HTTP request logging, requestId injection, or sensitive data sanitization** manually.
+
+It gives you a **centralized, type-safe, and configurable logger** out of the box.
+
+### Benefits:
 
 - Provides a **centralized logger** for your Node.js services.
 
 - Integrates with **Elasticsearch** to store logs in a structured format.
 
-- Allows **Sanitization** of sensitive fields (like password, token, email) in logs, with customizable fields.
+- Allows **Sanitization** of sensitive fields (like password, token) in logs, with customizable fields.
 
 - Returns a ready-to-use `logger` instance for application logging.
 
 - Supports automatic **RequestId injection** to correlate logs per request.
 
 - Written in **TypeScript** for full type safety and better IDE support.
+
+- Configurable log levels, service name, and **Elasticsearch integration**.
 
 - Supports **console logging** with colored output.
 
@@ -45,11 +55,11 @@ yarn add np-express-winston-logger
     }
   ```
 
-- Configurable log levels, service name, and **Elasticsearch integration**.
+- ⚠️ **Only trusted** libraries used in the background: **winston, express-winston, winston-elasticsearch, and uuid.**
 
----
+  <br>
 
-## Usage
+## 🔹 Usage
 
 ### ✅ Minimal Setup
 
@@ -274,4 +284,81 @@ logger.debug("Debug details here");
 logger.verbose("Verbose details");
 
 logger.silly("Silly/debug level message");
+```
+
+## 🔹LoggerOptions
+
+```ts
+export interface LoggerOptions {
+  serviceName: string;
+  minLevel?: LogLevel;
+  enableConsole?: boolean;
+  elasticsearch?: ElasticsearchOptions;
+  sanitize?: SanitizeOptions;
+  env?: Environments;
+}
+```
+
+---
+
+#### 🔹 serviceName (required)
+
+- Name of your service/microservice.
+
+- Included in every log line to help identify the source.
+
+---
+
+#### 🔹 minLevel (optional). Type: LogLevel
+
+- The minimum log level to capture (silly, debug, verbose, http, info, warn, error).
+
+- Example: minLevel: LogLevel.INFO will log info, warn, error, but ignore debug/verbose.
+
+---
+
+#### 🔹 enableConsole (optional, default: false)
+
+- Whether to print logs to the console with colors.
+
+- Useful in development for quick debugging.
+
+---
+
+#### 🔹 elasticsearch (optional)
+
+- Enable structured log shipping to Elasticsearch.
+
+```ts
+export type ElasticsearchOptions = { url: string };
+```
+
+---
+
+#### 🔹 sanitize (optional)
+
+- Automatically masks sensitive data in logs.
+
+  - Default fields (password, token, accessToken, refreshToken) are always sanitized.
+
+  - You can add your own fields, e.g. sanitize: { sensitiveFields: ["email"] }.
+
+```ts
+export type SanitizeOptions = { sensitiveFields: string[] };
+```
+
+---
+
+#### 🔹 env (optional, default: "dev")
+
+- Environment the logger is running in.
+
+- Example behavior:
+
+  - "prod" → hides debug/verbose logs.
+
+  - "dev" → full verbose logging.
+
+```ts
+export type Environments = "dev" | "prod" | "test" | "stage";
 ```
